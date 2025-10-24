@@ -30,39 +30,15 @@ Initially, the program will have one compression algorithm implemented to learn 
 9-The program will test the project by comparing files reconstructed and original, examining compression ratios, and making sure that information is not lost..]
 
 ## Data Structures that will be used
-[
-                    DATA STRUCTURES USED IN PROJECT                 
-+------------------------+-------------------------------------------+
-| Data Structure         | Purpose / Usage                           
-+------------------------+-------------------------------------------+
-| Tree (Huffman Tree)    | Used to represent character codes based on
-|                        | their frequency for Huffman Encoding
-+------------------------+-------------------------------------------+
-| Map (Character Map)    | Stores frequency count or mapping between 
-|                        | characters and their codes.
-+------------------------+-------------------------------------------+
-| Priority Queue (Min)   | Used to select nodes with lowest frequency
-|                        | while building Huffman Tree
-+------------------------+-------------------------------------------+
-| Queue                  | Used during level-order traversal or      
-|                        | decoding of encoded binary tree.          
-+------------------------+-------------------------------------------+
-| Stack                  | May be used for backtracking or reversing 
-|                        | operations during encoding/decoding.      
-+------------------------+-------------------------------------------+
-| Array / String         | To store file content, binary data, or    
-|                        | intermediate compressed sequences.        
-+------------------------+-------------------------------------------+
-| Hash Table / Unordered | For faster lookup of character-to-code or 
-| Map                    | code-to-character mappings.               
-+------------------------+-------------------------------------------+
-| Linked List            | Can represent dynamic data nodes when     
-|                        | simulating bit streams or dictionaries.   
-+------------------------+-------------------------------------------+
-| Heap                   | Used for building efficient priority      
-|                        | queues in Huffman Encoding.               
-+------------------------+-------------------------------------------+
-| File Stream (fstream)  | Handles reading input files and writing   
-|                        | compressed or decompressed data.          
-] 
-
+| Data Structure         | Purpose / Usage |
+|------------------------|-----------------|
+| Tree (Huffman Tree)    | Used to represent character codes based on their frequency for Huffman Encoding |
+| Map (Character Map)    | Stores frequency count or mapping between characters and their codes. |
+| Priority Queue (Min)   | Used to select nodes with lowest frequency while building Huffman Tree |
+| Queue                  | Used during level-order traversal or decoding of encoded binary tree. |
+| Stack                  | May be used for backtracking or reversing operations during encoding/decoding. |
+| Array / String         | To store file content, binary data, or intermediate compressed sequences. |
+| Hash Table / Unordered Map | For faster lookup of character-to-code or code-to-character mappings. |
+| Linked List            | Can represent dynamic data nodes when simulating bit streams or dictionaries. |
+| Heap                   | Used for building efficient priority queues in Huffman Encoding. |
+| File Stream (fstream)  | Handles reading input files and writing compressed or decompressed data. |
