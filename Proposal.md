@@ -10,7 +10,7 @@
 Our project mainly focuses on developing file compression system that reduces the size of text data without losing any information. The project will include different algorithms where we will compare the encoding efficiency based on frequency or patterns. The file compression system will read input files, then it will compress to binary format and later it will allow to decompress for verification of compressed data. Moreover, it will demonstrate how compression techniques can optimize storage usage and improve file transfer efficiency. The project will also compare the efficiency and effectiveness of different algorithms used in terms of compression ratio and frequency.
 
 ## Description
-[1-The program will create a program that is able to shrink the size of a file using a compression algorithm.
+1-The program will create a program that is able to shrink the size of a file using a compression algorithm.
 
 2-The program will then have the capability to restore (decompress) the same file back to its original size with no data lost.
 Initially, the program will have one compression algorithm implemented to learn the basic idea behind file minimization.
@@ -27,7 +27,7 @@ Initially, the program will have one compression algorithm implemented to learn 
 
 8-It will be a system coded in C++ with data structures such as trees, maps, heap and queues etc.
 
-9-The program will test the project by comparing files reconstructed and original, examining compression ratios, and making sure that information is not lost..]
+9-The program will test the project by comparing files reconstructed and original, examining compression ratios, and making sure that information is not lost.
 
 ## Data Structures that will be used
 | Data Structure         | Purpose / Usage |
