@@ -7,7 +7,7 @@
 |K24-2543|Muhammad Nouman Anwar|
 
 ## Introduction
-[Our project mainly focuses on developing file compression system that reduces the size of text data without losing any information. The project will include different algorithms where we will compare the encoding efficiency based on frequency or patterns. The file compression system will read input files, then it will compress to binary format and later it will allow to decompress for verification of compressed data. Moreover, it will demonstrate how compression techniques can optimize storage usage and improve file transfer efficiency. The project will also compare the efficiency and effectiveness of different algorithms used in terms of compression ratio and frequency.]
+Our project mainly focuses on developing file compression system that reduces the size of text data without losing any information. The project will include different algorithms where we will compare the encoding efficiency based on frequency or patterns. The file compression system will read input files, then it will compress to binary format and later it will allow to decompress for verification of compressed data. Moreover, it will demonstrate how compression techniques can optimize storage usage and improve file transfer efficiency. The project will also compare the efficiency and effectiveness of different algorithms used in terms of compression ratio and frequency.
 
 ## Description
 [1-The program will create a program that is able to shrink the size of a file using a compression algorithm.
