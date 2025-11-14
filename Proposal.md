@@ -1,3 +1,4 @@
+# ACCEPTED
 # DSA_FALL_2025_PROJECT
 # File compression using Huffman encoding and few others
 
