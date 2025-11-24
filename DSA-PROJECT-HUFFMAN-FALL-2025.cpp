@@ -1,8 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <unordered_map>
-#include <queue>
-#include <vector>
+#include<iostream>
+#include<fstream>
+#include<unordered_map>
+#include<queue>
+#include<vector>
 using namespace std;
 class HuffmanNode{
 public:
@@ -28,33 +28,29 @@ public:
     unordered_map<char, string> huffmanCodeMap;
     void createHuffmanCodes(HuffmanNode *currentNode, string currentCode)
     {
-        if (currentNode == nullptr)
+        if(currentNode == nullptr)
             return;
-        if (currentNode->leftChild == nullptr && currentNode->rightChild == nullptr){
+        if(currentNode->leftChild == nullptr && currentNode->rightChild == nullptr){
             huffmanCodeMap[currentNode->data] = currentCode;
             return;
         }
         createHuffmanCodes(currentNode->leftChild, currentCode + "0");
         createHuffmanCodes(currentNode->rightChild, currentCode + "1");
     }
-    HuffmanNode *constructHuffmanTree(unordered_map<char, int> frequencyTable)
-    {
+    HuffmanNode *constructHuffmanTree(unordered_map<char, int> frequencyTable){
         priority_queue<HuffmanNode *, vector<HuffmanNode *>, NodeComparator> minPriorityQueue;
-        for (auto pair : frequencyTable)
-        {
+        for(auto pair : frequencyTable){
             HuffmanNode *newNode = new HuffmanNode(pair.first, pair.second);
             minPriorityQueue.push(newNode);
         }
-        if (minPriorityQueue.size() == 1)
-        {
+        if(minPriorityQueue.size() == 1){
             HuffmanNode *singleNode = minPriorityQueue.top();
             minPriorityQueue.pop();
             HuffmanNode *rootNode = new HuffmanNode('\0', singleNode->frequency);
             rootNode->leftChild = singleNode;
             return rootNode;
         }
-        while (minPriorityQueue.size() > 1)
-        {
+        while (minPriorityQueue.size() > 1){
             HuffmanNode *leftNode = minPriorityQueue.top();
             minPriorityQueue.pop();
             HuffmanNode *rightNode = minPriorityQueue.top();
@@ -76,7 +72,7 @@ public:
                 byteBuffer |= 1;
             }
             bitCount++;
-            if(bitCount == 8) {
+            if(bitCount == 8){
                 outputStream.write((char*)&byteBuffer, 1);
                 byteBuffer = 0;
                 bitCount = 0;
@@ -104,76 +100,87 @@ public:
         }
         return bitSequence;
     }
- void compressFile(string inputFilename, string outputFilename)
-    {
+    void compressFile(string inputFilename, string outputFilename){
         ifstream inputFile(inputFilename, ios::binary);
-        if (!inputFile)
-        {
+        if(!inputFile){
             cout << "Error: Cannot open input file." << endl;
             return;
         }
-
         string fileContent((istreambuf_iterator<char>(inputFile)), {});
         inputFile.close();
-
         unordered_map<char, int> frequencyTable;
-
-        for (char character : fileContent)
-        {
+        for(char character : fileContent){
             frequencyTable[character]++;
         }
-
         HuffmanNode *rootNode = constructHuffmanTree(frequencyTable);
         createHuffmanCodes(rootNode, "");
-
         string encodedBitStream = "";
-
-        for (char character : fileContent)
-        {
+        for(char character : fileContent){
             encodedBitStream += huffmanCodeMap[character];
         }
-
         ofstream outputFile(outputFilename, ios::binary);
-        if (!outputFile)
-        {
+        if(!outputFile){
             cout << "Error: Cannot create output file." << endl;
             return;
         }
-
         int symbolCount = frequencyTable.size();
         outputFile.write((char *)&symbolCount, sizeof(int));
-
-        for (auto entry : frequencyTable)
-        {
+        for(auto entry : frequencyTable){
             outputFile.write((char *)&entry.first, 1);
             outputFile.write((char *)&entry.second, sizeof(int));
         }
-
         int totalBits = encodedBitStream.length();
         outputFile.write((char *)&totalBits, sizeof(int));
-
         writeBinaryStream(outputFile, encodedBitStream);
         outputFile.close();
     }
-
-    HuffmanNode *reconstructTreeFromFile(ifstream &inputFile)
-    {
+    HuffmanNode *reconstructTreeFromFile(ifstream &inputFile){
         int symbolCount;
         inputFile.read((char *)&symbolCount, sizeof(int));
-
         unordered_map<char, int> frequencyTable;
-
-        for (int i = 0; i < symbolCount; i++)
-        {
+        for(int i = 0; i < symbolCount; i++){
             char character;
             int frequency;
             inputFile.read((char *)&character, 1);
             inputFile.read((char *)&frequency, sizeof(int));
             frequencyTable[character] = frequency;
         }
-
         HuffmanNode *rootNode = constructHuffmanTree(frequencyTable);
         return rootNode;
+    }
+    void decompressFile(string inputFilename, string outputFilename){
+        ifstream inputFile(inputFilename, ios::binary);
+        if(!inputFile){
+            cout << "Error: Cannot open compressed file." << endl;
+            return;
+        }
+        HuffmanNode *rootNode = reconstructTreeFromFile(inputFile);
+        int totalBitCount;
+        inputFile.read((char *)&totalBitCount, sizeof(int));
+        string bitStream = readBinaryStream(inputFile, totalBitCount);
+        inputFile.close();
+        string decodedText = "";
+        HuffmanNode *currentNode = rootNode;
+        for(size_t i = 0; i < bitStream.size(); i++){
+            char currentBit = bitStream[i];
+            if(currentBit == '0'){
+                currentNode = currentNode->leftChild;
+            }
+            else{
+                currentNode = currentNode->rightChild;
+            }
+            if(currentNode->leftChild == nullptr && currentNode->rightChild == nullptr){
+                decodedText += currentNode->data;
+                currentNode = rootNode;
+            }
+        }
+        ofstream outputFile(outputFilename, ios::binary);
+        if(!outputFile){
+            cout << "Error: Cannot create output file." << endl;
+            return;
+        }
+        outputFile.write(decodedText.c_str(), decodedText.length());
+        outputFile.close();
     }
 };
 int main(){
