@@ -1,4 +1,4 @@
-**Compression Techniques using DSA Huffman Encoding and LZW**
+**Compression Techniques using DSA: Huffman Encoding and LZW**
 
 This repository contains my Data Structures and Algorithms (DSA) project focused on lossless data compression techniques. In this project, I implemented two widely used compression algorithms: Huffman Encoding and LZW. The main goal was to understand how data can be compressed efficiently to reduce storage space while preserving the original information.
 
